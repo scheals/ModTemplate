@@ -1,7 +1,7 @@
 ﻿using BepInEx;
-using HarmonyLib;
 using Eremite;
 using Eremite.Controller;
+using HarmonyLib;
 
 namespace ModTemplate
 {
@@ -14,14 +14,14 @@ namespace ModTemplate
         private void Awake()
         {
             Instance = this;
-            harmony = Harmony.CreateAndPatchAll(typeof(Plugin));  
+            harmony = Harmony.CreateAndPatchAll(typeof(Plugin));
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
         }
 
         [HarmonyPatch(typeof(MainController), nameof(MainController.OnServicesReady))]
         [HarmonyPostfix]
         private static void HookMainControllerSetup()
-        { 
+        {
             // This method will run after game load (Roughly on entering the main menu)
             // At this point a lot of the game's data will be available.
             // Your main entry point to access this data will be `Serviceable.Settings` or `MainController.Instance.Settings`
@@ -37,6 +37,13 @@ namespace ModTemplate
             // So just use Harmony and save us all some time. This method will run after every game start
             var isNewGame = MB.GameSaveService.IsNewGame();
             Instance.Logger.LogInfo($"Entered a game. Is this a new game: {isNewGame}.");
+
+            if (isNewGame)
+            {
+                SO.EffectsService.GrantWildcardPick(1);
+                Plugin.Instance.Logger.LogInfo("New wildcard pick granted for new game");
+
+            }
         }
     }
 }
