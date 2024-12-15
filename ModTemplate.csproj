@@ -8,7 +8,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <StormPath>D:\\SteamLibrary\\steamapps\\common\\Against the Storm</StormPath>
-    <BepInExPath>C:\\Users\\pieco\\AppData\\Roaming\\r2modmanPlus-local\\AgainstTheStorm\\profiles\\Schealsdev</BepInExPath>
+    <BepInExPath>C:\\Users\\$(WINDOWSUSERNAME)\\AppData\\Roaming\\r2modmanPlus-local\\AgainstTheStorm\\profiles\\Schealsdev</BepInExPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,7 +26,7 @@
         
         <Reference Include="$(StormPath)/Against the Storm_Data/Managed/Assembly-CSharp.dll" Publicize="true" />
         <Reference Include="API">
-          <HintPath>C:\Users\pieco\AppData\Roaming\r2modmanPlus-local\AgainstTheStorm\profiles\Schealsdev\BepInEx\plugins\ATS_API_Devs-API\API.dll</HintPath>
+          <HintPath>C:\Users\$(WINDOWSUSERNAME)\AppData\Roaming\r2modmanPlus-local\AgainstTheStorm\profiles\Schealsdev\BepInEx\plugins\ATS_API_Devs-API\API.dll</HintPath>
         </Reference>
         <Reference Include="Sirenix.OdinInspector.Attributes">
           <HintPath>..\..\SteamLibrary\steamapps\common\Against the Storm\Against the Storm_Data\Managed\Sirenix.OdinInspector.Attributes.dll</HintPath>
