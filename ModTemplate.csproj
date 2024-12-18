@@ -328,7 +328,7 @@
     </ItemGroup>
   
   <ItemGroup>
-    <None Include="assets\*.*">
+    <None Include="Assets\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
