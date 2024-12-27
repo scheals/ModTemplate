@@ -1,26 +1,26 @@
-﻿using ATS_API.Effects;
-using ATS_API.Helpers;
-using BepInEx;
+﻿using BepInEx;
+using BepInEx.Logging;
 using Eremite;
 using Eremite.Controller;
 using Eremite.Controller.Generator;
 using Eremite.Model;
-using Eremite.Model.Effects;
-using Eremite.Model.Effects.Hooked;
 using HarmonyLib;
+using SchealsLearningMod.lib;
 
-namespace ModTemplate
+namespace SchealsLearningMod
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
         public static Plugin Instance;
         private Harmony harmony;
+        internal static ManualLogSource myLog;
 
         private void Awake()
         {
             Instance = this;
             harmony = Harmony.CreateAndPatchAll(typeof(Plugin));
+            myLog = Logger;
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
         }
 
@@ -56,22 +56,7 @@ namespace ModTemplate
         private static void PostSetupMainController()
         {
 
-            string effectName = "Stick Gatherers";
-            string effectIconPath = "StickStick.jpg";
-            int amount = 7;
-
-            GoodModel woodGoodModel = MB.Settings.GetGood(GoodsTypes.Mat_Raw_Wood.ToName());
-            GoodRef woodGoodRef = new() { good = woodGoodModel, amount = amount };
-            EffectBuilder<GoodsPerMinEffectModel> builder = new(PluginInfo.PLUGIN_GUID, effectName, effectIconPath);
-            builder.SetRarity(EffectRarity.Epic);
-            builder.SetPositive(true);
-            builder.SetDrawLimit(5);
-            builder.SetAvailableInAllBiomesAndSeasons();
-            builder.SetObtainedAsCornerstone();
-            builder.SetLabel("Scheals' Perk");
-            builder.SetDisplayName(effectName);
-            builder.SetDescription($"Gain {amount} of Wood {woodGoodModel.GetTextIcon()} every minute.");
-            builder.EffectModel.good = woodGoodRef;
+            SchealsCornerstones.addStickGatherers();
 
         }
 
