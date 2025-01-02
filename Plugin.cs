@@ -20,7 +20,7 @@ namespace SchealsLearningMod
         {
             Instance = this;
             harmony = Harmony.CreateAndPatchAll(typeof(Plugin));
-            myLog = Logger;
+            myLog = Instance.Logger;
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
         }
 
@@ -85,16 +85,10 @@ namespace SchealsLearningMod
                 stickStick.Apply();
                 Plugin.Instance.Logger.LogInfo("Stick Gatherers added.");
 
+                SO.StateService.Gameplay.cornerstonesRerollsLeft = 99;
+                Plugin.Instance.Logger.LogInfo("Cornerstone rerolls set to 99.");
+
             }
         }
-        [HarmonyPatch(typeof(GameLoader), nameof(GameLoader.LoadGame))]
-        [HarmonyPostfix]
-        private static void SetUpInitialState()
-        {
-            MB.MetaStateService.Perks.bonusCornerstonesRerolls = 99;
-            Plugin.Instance.Logger.LogInfo("Cornerstone rerolls set to 99.");
-        }
-
-
     }
 }
